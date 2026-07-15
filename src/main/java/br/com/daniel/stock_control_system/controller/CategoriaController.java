@@ -1,42 +1,53 @@
 package br.com.daniel.stock_control_system.controller;
 
+import br.com.daniel.stock_control_system.dto.request.CategoriaRequest;
+import br.com.daniel.stock_control_system.dto.response.CategoriaResponse;
 import br.com.daniel.stock_control_system.entity.Categoria;
+import br.com.daniel.stock_control_system.mapper.CategoriaMapper;
+import br.com.daniel.stock_control_system.repository.CategoriaRepository;
 import br.com.daniel.stock_control_system.service.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/categorias")
 public class CategoriaController {
 
-    private final CategoriaService service;
+    @Autowired
+    private CategoriaService categoriaService;
 
-    public CategoriaController(CategoriaService service) {
-        this.service = service;
+    @GetMapping
+    public List<CategoriaResponse> listar(){
+
+        return categoriaService.listar();
     }
 
-    @GetMapping("/categorias")
-    public List<Categoria> listar(){
-        return service.listar();
+    @PostMapping
+    public CategoriaResponse salvar(
+            @RequestBody CategoriaRequest request){
+
+        return categoriaService.salvar(request);
     }
 
-    @PostMapping("/categorias")
-    public Categoria salvar(@RequestBody Categoria categoria){
-        return service.salvar(categoria);
+    @GetMapping("/{id}")
+    public CategoriaResponse buscaPorId(@PathVariable Long id) {
+        System.out.println("Entrou no buscar por id: " +id);
+        return categoriaService.buscaPorId(id);
     }
 
-    @GetMapping("/categorias/{id}")
-    public Categoria buscaPorId(@PathVariable Long id){
-        return service.buscaPorId(id);
+    @PutMapping("/{id}")
+    public CategoriaResponse atualizar(@PathVariable Long id, @RequestBody CategoriaRequest request){
+        return categoriaService.atualizar(id, request);
     }
 
-    @PutMapping("/categorias/{id}")
-    public Categoria atualizar(@PathVariable Long id, @RequestBody Categoria categoria){
-        return service.atualizar(id, categoria);
-    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id){
 
-    @DeleteMapping("/categorias/{id}")
-    public void excluir(@PathVariable Long id){
-        service.excluir(id);
+        categoriaService.excluir(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
