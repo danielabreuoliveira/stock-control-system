@@ -2,10 +2,7 @@ package br.com.daniel.stock_control_system.controller;
 
 import br.com.daniel.stock_control_system.entity.Categoria;
 import br.com.daniel.stock_control_system.service.CategoriaService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,10 @@ public class CategoriaController {
     @PostMapping("/categorias")
     public Categoria salvar(@RequestBody Categoria categoria){
         return service.salvar(categoria);
+    }
+
+    @GetMapping("/categorias/{id}")
+    public Categoria buscaPorId(@PathVariable Long id){
+        return service.buscaPorId(id);
     }
 }

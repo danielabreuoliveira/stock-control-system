@@ -24,4 +24,8 @@ public class CategoriaService {
         return repository.save(categoria);
     }
 
+    public Categoria buscaPorId(Long id){
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Categoria não encontrada."));
+    }
+
 }
