@@ -20,4 +20,8 @@ public class CategoriaService {
         return repository.findAll();
     }
 
+    public Categoria salvar(Categoria categoria){
+        return repository.save(categoria);
+    }
+
 }
