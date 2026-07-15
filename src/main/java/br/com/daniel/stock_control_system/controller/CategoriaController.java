@@ -29,4 +29,14 @@ public class CategoriaController {
     public Categoria buscaPorId(@PathVariable Long id){
         return service.buscaPorId(id);
     }
+
+    @PutMapping("/categorias/{id}")
+    public Categoria atualizar(@PathVariable Long id, @RequestBody Categoria categoria){
+        return service.atualizar(id, categoria);
+    }
+
+    @DeleteMapping("/categorias/{id}")
+    public void excluir(@PathVariable Long id){
+        service.excluir(id);
+    }
 }

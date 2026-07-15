@@ -28,4 +28,17 @@ public class CategoriaService {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Categoria não encontrada."));
     }
 
+    public Categoria atualizar(Long id, Categoria categoriaAtualizada){
+        Categoria categoria = buscaPorId(id);
+
+        categoria.setNome(categoriaAtualizada.getNome());
+        categoria.setDescricao(categoriaAtualizada.getDescricao());
+
+        return repository.save(categoria);
+    }
+
+    public void excluir(Long id){
+        Categoria categoria = buscaPorId(id);
+        repository.delete(categoria);
+    }
 }
