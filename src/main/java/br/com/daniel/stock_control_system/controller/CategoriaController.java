@@ -9,6 +9,7 @@ import br.com.daniel.stock_control_system.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -37,6 +38,12 @@ public class CategoriaController {
     public CategoriaResponse buscaPorId(@PathVariable Long id) {
         System.out.println("Entrou no buscar por id: " +id);
         return categoriaService.buscaPorId(id);
+    }
+    @GetMapping("/buscar")
+    public List<CategoriaResponse> buscar(@RequestParam String nome){
+
+        return categoriaService.buscarPorNome(nome);
+
     }
 
     @PutMapping("/{id}")

@@ -51,6 +51,16 @@ public class CategoriaService {
         return CategoriaMapper.toResponse(categoria);
     }
 
+    public List<CategoriaResponse> buscarPorNome(String nome){
+
+        return categoriaRepository
+                .findByNomeContainingIgnoreCase(nome)
+                .stream()
+                .map(CategoriaMapper::toResponse)
+                .toList();
+
+    }
+
     public CategoriaResponse atualizar(Long id, CategoriaRequest request){
 
         Categoria categoria = categoriaRepository
