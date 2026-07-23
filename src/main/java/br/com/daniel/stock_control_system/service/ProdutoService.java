@@ -9,6 +9,8 @@ import br.com.daniel.stock_control_system.repository.CategoriaRepository;
 import br.com.daniel.stock_control_system.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProdutoService {
 
@@ -31,5 +33,10 @@ public class ProdutoService {
         produtoRepository.save(produto);
 
         return ProdutoMapper.toResponse(produto);
+    }
+
+    public List<ProdutoResponse> listar(){
+
+        return produtoRepository.findAll().stream().map(ProdutoMapper::toResponse).toList();
     }
 }
