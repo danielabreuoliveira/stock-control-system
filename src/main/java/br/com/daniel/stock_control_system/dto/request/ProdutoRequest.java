@@ -11,7 +11,7 @@ public record ProdutoRequest(
         String descricao,
         BigDecimal precoCompra,
         BigDecimal precoVenda,
-        BigDecimal estoque,
+        Integer estoque,
         String codigoBarras,
         boolean ativo,
         Long categoriaId

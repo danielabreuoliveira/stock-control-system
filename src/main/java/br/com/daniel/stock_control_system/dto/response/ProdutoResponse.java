@@ -9,7 +9,7 @@ public record ProdutoResponse(
         String descricao,
         BigDecimal precoCompra,
         BigDecimal precoVenda,
-        BigDecimal estoque,
+        Integer estoque,
         String codigoBarras,
         boolean ativo,
         Long categoriaId,
