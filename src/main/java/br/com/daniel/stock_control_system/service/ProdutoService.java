@@ -39,4 +39,11 @@ public class ProdutoService {
 
         return produtoRepository.findAll().stream().map(ProdutoMapper::toResponse).toList();
     }
+
+    public ProdutoResponse buscaPorId(Long id){
+
+        Produto produto = produtoRepository.findById(id).orElseThrow(()-> new RuntimeException("Produto não encontrado"));
+
+        return ProdutoMapper.toResponse(produto);
+    }
 }
