@@ -10,6 +10,7 @@ import br.com.daniel.stock_control_system.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoService {
@@ -64,5 +65,12 @@ public class ProdutoService {
         produtoRepository.save(produto);
 
         return ProdutoMapper.toResponse(produto);
+    }
+
+    public void Excluir(Long id){
+        Produto produto = produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        produtoRepository.delete(produto);
+
     }
 }
