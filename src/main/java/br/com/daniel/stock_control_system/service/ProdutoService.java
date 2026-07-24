@@ -46,4 +46,23 @@ public class ProdutoService {
 
         return ProdutoMapper.toResponse(produto);
     }
+
+    public ProdutoResponse atualizar(Long id, ProdutoRequest request){
+        Produto produto = produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        Categoria categoria = categoriaRepository.findById(request.categoriaId()).orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+
+        produto.setNome(request.nome());
+        produto.setDescricao(request.descricao());
+        produto.setPrecoCompra(request.precoCompra());
+        produto.setPrecoVenda(request.precoVenda());
+        produto.setEstoque(request.estoque());
+        produto.setCodigoBarras(request.codigoBarras());
+        produto.setAtivo(request.ativo());
+        produto.setCategoria(categoria);
+
+        produtoRepository.save(produto);
+
+        return ProdutoMapper.toResponse(produto);
+    }
 }
