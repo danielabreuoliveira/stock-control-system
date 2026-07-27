@@ -30,6 +30,8 @@ public class Produto {
 
     private Integer estoque;
 
+    private Integer estoqueMinimo;
+
     private String codigoBarras;
 
     private boolean ativo;
