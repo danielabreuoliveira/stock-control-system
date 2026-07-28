@@ -35,11 +35,22 @@ public class MovimentacaoService {
         movimentacao.setObservacao(request.observacao());
         movimentacao.setDataHora(LocalDateTime.now());
 
-        if (request.tipo() == TipoMovimentacao.SAIDA){
-            if(produto.getEstoque() < request.quantidade()){
-                throw new RuntimeException("Estoque insuficiente.");
+        switch (request.tipo()) {
+
+            case ENTRADA -> produto.setEstoque(
+                    produto.getEstoque() + request.quantidade()
+            );
+
+            case SAIDA -> {
+
+                if (produto.getEstoque() < request.quantidade()) {
+                    throw new RuntimeException("Estoque insuficiente.");
+                }
+
+                produto.setEstoque(
+                        produto.getEstoque() - request.quantidade()
+                );
             }
-            produto.setEstoque(produto.getEstoque() - request.quantidade());
         }
 
         produtoRepository.save(produto);
