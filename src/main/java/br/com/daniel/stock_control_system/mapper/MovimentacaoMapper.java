@@ -1,5 +1,6 @@
 package br.com.daniel.stock_control_system.mapper;
 
+import br.com.daniel.stock_control_system.dto.request.MovimentacaoRequest;
 import br.com.daniel.stock_control_system.dto.response.MovimentacaoResponse;
 import br.com.daniel.stock_control_system.entity.Movimentacao;
 
@@ -15,6 +16,18 @@ public class MovimentacaoMapper {
                 movimentacao.getObservacao(),
                 movimentacao.getDataHora()
         );
+    }
+
+    public static Movimentacao toEntity(MovimentacaoRequest request){
+
+        Movimentacao movimentacao = new Movimentacao();
+
+        movimentacao.setTipo(request.tipo());
+        movimentacao.setQuantidade(request.quantidade());
+        movimentacao.setObservacao(request.observacao());
+
+
+        return movimentacao;
     }
 
 }
