@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/movimentacoes")
 @RequiredArgsConstructor
@@ -15,6 +17,10 @@ public class MovimentacaoController {
 
     private final MovimentacaoService movimentacaoService;
 
+    @GetMapping
+    public List<MovimentacaoResponse> listar(){
+        return movimentacaoService.listar();
+    }
     @PostMapping
     public MovimentacaoResponse salvar(@RequestBody @Valid MovimentacaoRequest request){
         return movimentacaoService.salvar(request);

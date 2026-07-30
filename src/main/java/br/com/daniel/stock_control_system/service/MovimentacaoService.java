@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +59,9 @@ public class MovimentacaoService {
         Movimentacao movimentacaoSalva = movimentacaoRepository.save(movimentacao);
 
         return MovimentacaoMapper.toResponse(movimentacaoSalva);
+    }
+
+    public List<MovimentacaoResponse> listar(){
+        return movimentacaoRepository.findAll().stream().map(MovimentacaoMapper::toResponse).toList();
     }
 }
