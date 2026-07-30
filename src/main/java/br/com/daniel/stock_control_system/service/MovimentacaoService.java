@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -63,5 +64,11 @@ public class MovimentacaoService {
 
     public List<MovimentacaoResponse> listar(){
         return movimentacaoRepository.findAll().stream().map(MovimentacaoMapper::toResponse).toList();
+    }
+
+    public MovimentacaoResponse buscarPorId(Long id){
+        Movimentacao movimentacao = movimentacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Movimentacao não encontrada"));
+
+        return MovimentacaoMapper.toResponse(movimentacao);
     }
 }

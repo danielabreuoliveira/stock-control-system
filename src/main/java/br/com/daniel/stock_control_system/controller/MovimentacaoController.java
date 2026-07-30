@@ -25,4 +25,8 @@ public class MovimentacaoController {
     public MovimentacaoResponse salvar(@RequestBody @Valid MovimentacaoRequest request){
         return movimentacaoService.salvar(request);
     }
+    @GetMapping("/{id}")
+    public MovimentacaoResponse buscarPorID(@PathVariable Long id){
+        return movimentacaoService.buscarPorId(id);
+    }
 }
